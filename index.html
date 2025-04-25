@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hand Gesture Classifier</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="app-container">
+        <header>
+            <h1>Hand Gesture Recognition</h1>
+            <p>Real-time classification using TensorFlow.js and Teachable Machine</p>
+        </header>
+
+        <main>
+            <div class="control-panel">
+                <button id="start-btn" class="btn">Start Webcam</button>
+                <div class="status" id="status">Status: Ready</div>
+            </div>
+
+            <div class="webcam-panel">
+                <div id="webcam-container" class="webcam-box">
+                    <div class="placeholder">Webcam feed will appear here</div>
+                </div>
+                <div id="label-container" class="predictions-box"></div>
+            </div>
+        </main>
+
+        <footer>
+            <p>Powered by Teachable Machine and TensorFlow.js</p>
+        </footer>
+    </div>
+
+    <!-- Load TensorFlow.js and Teachable Machine libraries -->
+    <script src="https://cdn.jsdelivr.net/npm/@tensorflow/tfjs@latest/dist/tf.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@teachablemachine/image@latest/dist/teachablemachine-image.min.js"></script>
+    
+    <!-- Load our JavaScript -->
+    <script src="script.js"></script>
+</body>
+</html>
