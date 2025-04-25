@@ -1,32 +1,25 @@
-// Model URL from Teachable Machine
 const MODEL_URL = "https://teachablemachine.withgoogle.com/models/9WnmePhAo/";
-
-// Global variables
 let model, webcam, maxPredictions;
 let isRunning = false;
 
-// DOM elements
 const startBtn = document.getElementById('start-btn');
 const statusElement = document.getElementById('status');
 const webcamContainer = document.getElementById('webcam-container');
 const labelContainer = document.getElementById('label-container');
 
-// Initialize the application
+
 async function init() {
     try {
         statusElement.textContent = "Status: Loading model...";
         
-        // Load the model and metadata
         model = await tmImage.load(MODEL_URL + "model.json", MODEL_URL + "metadata.json");
         maxPredictions = model.getTotalClasses();
         
-        // Setup webcam
         const flip = true; // whether to flip the webcam
-        webcam = new tmImage.Webcam(400, 400, flip); // width, height, flip
+        webcam = new tmImage.Webcam(400, 400, flip); 
         await webcam.setup(); // request access to the webcam
         await webcam.play();
         
-        // Clear the placeholder and append webcam video
         webcamContainer.innerHTML = '';
         webcamContainer.appendChild(webcam.canvas);
         
@@ -47,7 +40,6 @@ async function init() {
         isRunning = true;
         startBtn.textContent = "Stop Webcam";
         
-        // Start prediction loop
         window.requestAnimationFrame(loop);
     } catch (error) {
         console.error("Error initializing:", error);
@@ -78,7 +70,6 @@ async function predict() {
 // Toggle webcam on/off
 async function toggleWebcam() {
     if (isRunning) {
-        // Stop webcam
         if (webcam) {
             webcam.stop();
         }
@@ -86,15 +77,11 @@ async function toggleWebcam() {
         startBtn.textContent = "Start Webcam";
         statusElement.textContent = "Status: Ready";
     } else {
-        // Start webcam
         await init();
     }
 }
 
-// Event listeners
 startBtn.addEventListener('click', toggleWebcam);
-
-// Clean up on page unload
 window.addEventListener('beforeunload', () => {
     if (webcam) {
         webcam.stop();
